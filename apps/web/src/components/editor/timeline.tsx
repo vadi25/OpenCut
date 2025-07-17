@@ -701,7 +701,7 @@ export function Timeline() {
                   <SplitSquareHorizontal className="h-4 w-4" />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>Separate audio (Ctrl+D)</TooltipContent>
+              <TooltipContent>Separate audio (Ctrl+M)</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>

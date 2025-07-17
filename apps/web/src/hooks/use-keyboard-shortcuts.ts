@@ -5,6 +5,8 @@ import { useTimelineStore } from "@/stores/timeline-store";
 import { usePlaybackStore } from "@/stores/playback-store";
 import { useProjectStore } from "@/stores/project-store";
 import { toast } from "sonner";
+import { generateUUID } from "@/lib/utils";
+import { TimelineTrack } from "@/types/timeline";
 
 export interface KeyboardShortcut {
   id: string;
@@ -34,6 +36,7 @@ export const useKeyboardShortcuts = (
     setSelectedElements,
     removeElementFromTrack,
     splitElement,
+    separateAudio,
     addElementToTrack,
     snappingEnabled,
     toggleSnapping,
@@ -258,6 +261,26 @@ export const useKeyboardShortcuts = (
             startTime: newStartTime,
           });
         }
+      },
+    },
+    {
+      id: "separate-audio",
+      keys: ["Ctrl+m", "Cmd+m"],
+      description: "Separate audio from video",
+      category: "Editing",
+      requiresSelection: true,
+      action: () => {
+        if (selectedElements.length !== 1) {
+          toast.error("Select exactly one media element to separate audio");
+          return;
+        }
+        const { trackId, elementId } = selectedElements[0];
+        const track = tracks.find((t) => t.id === trackId);
+        if (!track || track.type !== "media") {
+          toast.error("Select a media element to separate audio");
+          return;
+        }
+        separateAudio(trackId, elementId);
       },
     },
 
