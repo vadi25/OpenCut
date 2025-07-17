@@ -5,8 +5,6 @@ import { useTimelineStore } from "@/stores/timeline-store";
 import { usePlaybackStore } from "@/stores/playback-store";
 import { useProjectStore } from "@/stores/project-store";
 import { toast } from "sonner";
-import { generateUUID } from "@/lib/utils";
-import { TimelineTrack } from "@/types/timeline";
 
 export interface KeyboardShortcut {
   id: string;
